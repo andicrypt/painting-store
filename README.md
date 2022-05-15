@@ -6,11 +6,11 @@ To run the repository:
 # Run back-end:
 cd back-end \
 yarn install \
-yarn start \
+yarn start 
 
 # Run font-end:
 cd front-end \
 yarn install \
-yarn start \
+yarn start 
 
 
