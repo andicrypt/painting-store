@@ -6,7 +6,7 @@ export type User = any;
 
 @Injectable()
 export class UserService {
-  private readonly users = [
+  private readonly users: User[] = [
     {
       userId: 1,
       username: 'john',
@@ -21,8 +21,9 @@ export class UserService {
       userId: 3,
       username: 'dien',
       password: 'possible'
-    }
-  ]
+    },
+  ];
+  
   create(createUserDto: CreateUserDto) {
     return 'This action adds a new user';
   }

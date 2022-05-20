@@ -6,14 +6,16 @@ import { AuthService } from './auth.service';
 import { jwtConstants } from './constants';
 import { JwtStrategy } from './jwt.strategy';
 import { LocalStrategy } from './local.strategy';
-require("dotenv").config(); 
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 @Module({
     imports:[
         UserModule,
         PassportModule,
         JwtModule.register({
-            secret: `${process.env.JWT_KEY}`,
+            // secret: `${process.env.JWT_KEY}`,
+            secret: 'secretKey',
             signOptions: {expiresIn: '60s'},
         }),
     ],
