@@ -15,16 +15,14 @@ import {
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { AbilityFactory, Action } from 'src/ability/ability.factory';
 import { ApiBearerAuth, ApiCookieAuth, ApiTags } from '@nestjs/swagger';
 import { User } from './entities/user.entity';
-import { LocalAuthGuard } from 'src/auth/local-auth.guard';
+import { LocalAuthGuard } from 'src/auth/strategy/local-auth.guard';
 import { AuthService } from 'src/auth/auth.service';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { JwtAuthGuard } from 'src/auth/strategy/jwt-auth.guard';
 import { RolesGuard } from './roles/roles.guard';
 import { Roles } from './roles/roles.decorator';
 import { UserRole } from 'src/schemas/users.schema';
-import { REQUEST } from '@nestjs/core';
 
 @ApiCookieAuth()
 @ApiTags('user')
@@ -32,10 +30,8 @@ import { REQUEST } from '@nestjs/core';
 export class UserController {
   constructor(
     private userService: UserService,
-    private abilityFactory: AbilityFactory,
   ) {}
 
-  @HttpCode(201)
   @Post('register')
   async create(@Body() dto: CreateUserDto) {
     await this.userService.create(dto);
@@ -50,19 +46,6 @@ export class UserController {
     return await this.userService.findAllUser(UserRole.USER);
   }
   
-  
-  // @Post()
-  // create(@Body() createUserDto: CreateUserDto) {
-  //   // const user = req.user;
-  //   const user = { id: 1, isAdmin: false };
-  //   const ability = this.abilityFactory.defineAbility(user);
-
-  //   const isAllowed = ability.can(Action.Create, User);
-  //   if (!isAllowed) {
-  //     throw new ForbiddenException('only admin!!');
-  //   }
-  //   return this.userService.create(createUserDto);
-  // }
 
   @Get()
   findAll() {
