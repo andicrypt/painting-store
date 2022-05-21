@@ -10,7 +10,6 @@ async function bootstrap() {
   .setTitle("Painting Store")
   .setDescription("The Painting Store API description")
   .setVersion("1.0")
-  .addTag('items')
   .addBearerAuth({
     type: 'http',
     in: 'header',
