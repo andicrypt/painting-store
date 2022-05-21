@@ -11,11 +11,17 @@ async function bootstrap() {
   .setDescription("The Painting Store API description")
   .setVersion("1.0")
   .addTag('items')
+  .addBearerAuth({
+    type: 'http',
+    in: 'header',
+    scheme: 'bearer',
+    bearerFormat: 'JWT',
+  })
   .build()
 
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+  SwaggerModule.setup('api', app, document); 
 
-  await app.listen(3000);
+  await app.listen(3001);
 }
 bootstrap();

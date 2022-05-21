@@ -8,23 +8,10 @@ import { CreateUserDto } from './user/dto/create-user.dto';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService, private authService: AuthService) {}
+  constructor(private readonly appService: AppService) {}
 
   @Get()
   getHello(): string {
     return this.appService.getHello();
-  }
-
-  @UseGuards(LocalAuthGuard)
-  @Post('auth/login')
-  async login(@Body() req: CreateUserDto) {
-    console.log('dien', req);
-    return this.authService.login(req);
-  }
-
-  @UseGuards(JwtAuthGuard)
-  @Get('profile')
-  getProfile(@Request() req) { 
-    return req.user;
   }
 }

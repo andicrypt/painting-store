@@ -6,20 +6,30 @@ import { AuthService } from './auth.service';
 import { jwtConstants } from './constants';
 import { JwtStrategy } from './jwt.strategy';
 import { LocalStrategy } from './local.strategy';
-import * as dotenv from 'dotenv';
-dotenv.config();
+import { AuthController } from './auth.controller';
+import { ConfigService } from '@nestjs/config';
+
 
 @Module({
     imports:[
         UserModule,
         PassportModule,
-        JwtModule.register({
-            // secret: `${process.env.JWT_KEY}`,
-            secret: 'secretKey',
-            signOptions: {expiresIn: '60s'},
-        }),
+        JwtModule.registerAsync({
+            useFactory: (configService: ConfigService) => {
+                console.log(process.env.JWT_KEY);
+                const options = {
+                    secret: process.env.JWT_KEY,
+                    // secretOrPrivateKey: process.env.JWT_KEY,
+                    signOptions: {expiresIn: '60s'},
+                }
+                console.log(options);
+                return options;
+            },
+            inject: [ConfigService],
+        })
     ],
     providers: [AuthService, JwtStrategy, LocalStrategy],
     exports: [AuthService],
+    controllers: [AuthController],
 })
 export class AuthModule {}

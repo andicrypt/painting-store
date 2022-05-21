@@ -6,10 +6,18 @@ import { AbilityModule } from './ability/ability.module';
 import { AuthService } from './auth/auth.service';
 import { AuthModule } from './auth/auth.module';
 import { JwtService } from '@nestjs/jwt';
+import { ConfigModule } from '@nestjs/config';
+import {MongooseModule} from '@nestjs/mongoose';
 
 @Module({
-  imports: [UserModule, AbilityModule, AuthModule],
+  imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
+    MongooseModule.forRoot(process.env.DB_URI, { useNewUrlParser: true }),
+    UserModule,
+    AbilityModule,
+    AuthModule,
+  ],
   controllers: [AppController],
-  providers: [AppService, AuthService, JwtService],
+  providers: [AppService],
 })
 export class AppModule {}
