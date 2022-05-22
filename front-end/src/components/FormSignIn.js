@@ -1,14 +1,16 @@
 import React from 'react'
+import useForm from '../helpers/useForm';
+import validateInfo from '../helpers/validateInfo';
 
-function FormSignIn() {
-    // const { handleChange, handleSubmit, values, errors } = useForm(
-    //   submitForm,
-    //   validate
-    // );
+function FormSignIn({submitForm}) {
+    const { handleChange, handleSubmit, values, errors } = useForm(
+      submitForm,
+      validateInfo
+    );
   
     return (
       <div className='form-content-left'>
-        <form  className='form' noValidate>
+        <form onSubmit={handleSubmit}  className='form' noValidate>
           <h1>
             Get started with us today! 
           </h1>
@@ -19,22 +21,22 @@ function FormSignIn() {
               type='text'
               name='username'
               placeholder='Enter your username'
-            //   value={values.username}
-            //   onChange={handleChange}
+              value={values.username}
+              onChange={handleChange}
             />
-            {/* {errors.username && <p>{errors.username}</p>} */}
+            {errors.username && <p>{errors.username}</p>}
           </div>
           <div className='form-inputs'>
-            <label className='form-label'>Email</label>
+            <label className='form-label'>Password</label>
             <input
               className='form-input'
-              type='email'
-              name='email'
-              placeholder='Enter your email'
-            //   value={values.email}
-            //   onChange={handleChange}
+              type='text'
+              name='password'
+              placeholder='Enter your password'
+              value={values.password}
+              onChange={handleChange}
             />
-            {/* {errors.email && <p>{errors.email}</p>} */}
+            {errors.password && <p>{errors.password}</p>}
           </div>
           <button className='form-input-btn' type='submit'>
             Sign up
@@ -48,4 +50,4 @@ function FormSignIn() {
   };
   
 
-export default FormSignIn
+export default FormSignIn;

@@ -1,40 +1,32 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 
 const useForm = (callback, validate) => {
   const [values, setValues] = useState({
     username: '',
     email: '',
     password: '',
-    password2: ''
-  });
-  const [errors, setErrors] = useState({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
+    password2: '',
+  })
+  const [errors, setErrors] = useState({})
 
-  const handleChange = e => {
-    const { name, value } = e.target;
+  const handleChange = (e) => {
+    const { name, value } = e.target
     setValues({
       ...values,
-      [name]: value
-    });
-  };
+      [name]: value,
+    })
+    console.log(values)
+  }
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    console.log(values);
-    setErrors(validate(values));
-    setIsSubmitting(true);
-  };
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    setErrors(validate(values))
 
-  useEffect(
-    () => {
-      if (Object.keys(errors).length === 0 && isSubmitting) {
-        callback();
-      }
-    },
-    [errors]
-  );
+    callback(values)
+  }
 
-  return { handleChange, handleSubmit, values, errors };
-};
+  return { handleChange, handleSubmit, values, errors }
+}
 
-export default useForm;
+export default useForm

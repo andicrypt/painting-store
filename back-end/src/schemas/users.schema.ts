@@ -16,6 +16,9 @@ export class User {
     password: string;
 
     @Prop()
+    email: string;
+
+    @Prop()
     role: UserRole;
 }
 

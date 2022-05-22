@@ -34,16 +34,16 @@ export class UserController {
 
   @Post('register')
   async create(@Body() dto: CreateUserDto) {
-    await this.userService.create(dto);
+    return await this.userService.create(dto);
   }
 
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(UserRole.ADMIN)
   @Get('profile')
-  async getProfile(@Request() req) { 
+  async getProfile() { 
     // return req.user;
-    return await this.userService.findAllUser(UserRole.USER);
+    return await this.userService.findAllUser();
   }
   
 
@@ -58,13 +58,19 @@ export class UserController {
   // }
   //
 
-  @Patch(':id')
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(UserRole.ADMIN)
+  @Patch('update/:id')
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.userService.update(+id, updateUserDto);
+    return this.userService.update(id, updateUserDto);
   }
 
-  @Delete(':id')
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(UserRole.ADMIN)
+  @Delete('delete/:id')
   remove(@Param('id') id: string) {
-    return this.userService.remove(+id);
+    return this.userService.remove(id);
   }
 }

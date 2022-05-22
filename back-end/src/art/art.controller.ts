@@ -37,9 +37,12 @@ export class ArtController {
     return this.artService.findOne(id);
   }
 
-  @Patch(':id')
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(UserRole.ADMIN)
+  @Patch('update/:id')
   update(@Param('id') id: string, @Body() updateArtDto: UpdateArtDto) {
-    return this.artService.update(+id, updateArtDto);
+    return this.artService.update(id, updateArtDto);
   }
 
   @ApiBearerAuth()
