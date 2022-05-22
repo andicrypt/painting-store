@@ -22,8 +22,8 @@ export class ArtService {
     return await this.artModel.findById(id).exec();
   }
 
-  update(id: number, updateArtDto: UpdateArtDto) {
-    return `This action updates a #${id} art`;
+  async update(id: string, updateArtDto: UpdateArtDto) {
+    return await this.artModel.findByIdAndUpdate(id, updateArtDto);
   }
 
   async remove(id: string) {

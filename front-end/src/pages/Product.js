@@ -26,23 +26,23 @@ function Product() {
 
   console.log(pass);
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:3000/")
-      .then((response) => {
-        setImg(response.data[pass].img);
-        setName(response.data[pass].name);
-        setPrice(response.data[pass].price);
-        setProducts(response.data);
-        setStock(response.data[pass].stock);
-        setDes(response.data[pass].description);
-        setRating(response.data[pass].avgRating);
-        console.log(response.data[pass].desciption)
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get("http://localhost:3000/")
+  //     .then((response) => {
+  //       setImg(response.data[pass].img);
+  //       setName(response.data[pass].name);
+  //       setPrice(response.data[pass].price);
+  //       setProducts(response.data);
+  //       setStock(response.data[pass].stock);
+  //       setDes(response.data[pass].description);
+  //       setRating(response.data[pass].avgRating);
+  //       console.log(response.data[pass].desciption)
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, []);
 
   return (
     <div className="product">
@@ -53,7 +53,7 @@ function Product() {
         <h1>{name}</h1>
         <h4>Price: {price}</h4>
         <h4>Rating: {rating}</h4>
-        <h4>Stock {stock}</h4>
+        <h4>Stock: {stock}</h4>
         <p>Description: {des}</p>
 
         <div style={{ display: "block", padding: 0 }}>

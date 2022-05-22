@@ -21,17 +21,17 @@ function Menu() {
 
   const [products, setProducts] = useState([]);
 
-  useEffect(() => {
-    axios.get('http://localhost:3000/')
-    .then(response => {
-      console.log(response.data);
-      console.log(response.data[0].img);
-      setAllProducts(response.data);
-    })
-    .catch(err => {
-      console.log(err);
-    })
-  }, [])
+  // useEffect(() => {
+  //   axios.get('http://localhost:3000/')
+  //   .then(response => {
+  //     console.log(response.data);
+  //     console.log(response.data[0].img);
+  //     setAllProducts(response.data);
+  //   })
+  //   .catch(err => {
+  //     console.log(err);
+  //   })
+  // }, [])
 
 
   return (

@@ -25,8 +25,8 @@ export class UserService {
     return createUser.save();
   }
 
-  async findAllUser(role: UserRole): Promise<User[] | undefined> {
-    return await this.userModel.find({role}).exec();
+  async findAllUser(): Promise<User[] | undefined> {
+    return await this.userModel.find({}).exec();
   }
 
   async findAll(): Promise<User[] | undefined> {
@@ -41,11 +41,16 @@ export class UserService {
     return this.userModel.findOne({ username});
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async update(id: string, updateUserDto: UpdateUserDto) {
+    const hash: string = await bcrypt.hash(updateUserDto.password, saltOrRounds);
+    updateUserDto = {
+      ...updateUserDto,
+      password: hash
+    }
+    return await this.userModel.findByIdAndUpdate(id, updateUserDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async remove(id: string) {
+    return await this.userModel.findByIdAndRemove(id).exec();
   }
 }
