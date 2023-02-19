@@ -10,7 +10,6 @@ import Signup from "./pages/Signup";
 import Contact from "./pages/Contact";
 import Product from "./pages/Product";
 import { createContext, useContext, useState } from "react";
-import axios from "axios";
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 

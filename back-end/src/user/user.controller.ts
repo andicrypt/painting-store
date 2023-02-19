@@ -42,15 +42,9 @@ export class UserController {
   @Roles(UserRole.ADMIN)
   @Get('profile')
   async getProfile() { 
-    // return req.user;
     return await this.userService.findAllUser();
   }
   
-
-  @Get()
-  findAll() {
-    return this.userService.findAll();
-  }
 
   // @Get(':id')
   // findOne(@Param('id') id: string) {
