@@ -23,6 +23,6 @@ async function bootstrap() {
   SwaggerModule.setup('swagger', app, document); 
 
   app.use(cors());
-  await app.listen(3001);
+  await app.listen(3000);
 }
 bootstrap();
