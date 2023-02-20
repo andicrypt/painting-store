@@ -1,0 +1,3 @@
+[submodule "painting-store-backend"]
+	path = painting-store-backend
+	url = https://github.com/andicrypt/painting-store-backend.git
