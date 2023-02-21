@@ -1,3 +1,6 @@
 [submodule "painting-store-backend"]
 	path = painting-store-backend
 	url = https://github.com/andicrypt/painting-store-backend.git
+[submodule "painting-store-frontend"]
+	path = painting-store-frontend
+	url = https://github.com/andicrypt/painting-store-frontend.git
